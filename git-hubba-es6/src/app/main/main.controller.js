@@ -19,7 +19,11 @@ class MainCtrl {
             this.findUsers(newVal, oldVal);
         }, 500 );
 
-        SCOPE.get(this).$watch('searchData', (newVal, oldVal) => this.lazyFind(newVal, oldVal) );
+        var watcher = angular.bind(this, function () {
+            return this.searchData;
+        });
+
+        SCOPE.get(this).$watch(watcher, (newVal, oldVal) => this.lazyFind(newVal, oldVal) );
     }
 
     //clearing the states after finding the users
